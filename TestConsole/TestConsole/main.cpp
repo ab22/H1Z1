@@ -136,8 +136,6 @@ int main(void) {
 	_tprintf(TEXT("> Priting in game coordinates\n"));
 	_tprintf(TEXT("--------------------------------------------\n"));
 
-
-
 	while (true) {
 		if (ReadProcessMemory(processHandle, (LPCVOID)((DWORD64)h1z1Module + zPosOffset), (LPVOID)&coords, sizeof(coords), NULL) == 0){
 			TCHAR  message[] = TEXT("error retrieving module information: error code(%d)");

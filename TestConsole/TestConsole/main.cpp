@@ -61,7 +61,7 @@ HANDLE GetH1Z1ProcessHandle() {
 
 HMODULE FindH1Z1Module(HANDLE processHandle) {
 	TCHAR   h1z1ExecutableName[] = TEXT("H1Z1.exe");
-	HMODULE modules[4048];
+	HMODULE modules[1024];
 	DWORD   cbNeeded;
 
 	if (!EnumProcessModulesEx(processHandle, modules, sizeof(modules), &cbNeeded, LIST_MODULES_ALL)) {
@@ -142,6 +142,7 @@ int main(void) {
 			DWORD errorCode = GetLastError();
 
 			_tprintf(message, errorCode);
+			break;
 		}
 
 		_tprintf(TEXT("(x:%f, z:%f) \n"), coords.x, coords.z);

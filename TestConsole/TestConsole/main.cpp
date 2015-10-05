@@ -129,9 +129,6 @@ int main(void) {
 	_tprintf(TEXT(">   Base of DLL: 0x%X\n"), moduleInfo.lpBaseOfDll);
 	_tprintf(TEXT("> Size of image: 0x%X\n"), moduleInfo.SizeOfImage);
 	_tprintf(TEXT(">   Entry point: 0x%X\n"), moduleInfo.EntryPoint);
-	_tprintf(TEXT(">       LPCVOID: %d\n"), sizeof(LPCVOID));
-	_tprintf(TEXT(">           int: %d\n"), sizeof(int));
-	_tprintf(TEXT(">       HMODULE: %d\n"), sizeof(HMODULE));
 	_tprintf(TEXT("--------------------------------------------\n"));
 	_tprintf(TEXT("> Priting in game coordinates\n"));
 	_tprintf(TEXT("--------------------------------------------\n"));

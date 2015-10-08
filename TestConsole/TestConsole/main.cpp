@@ -125,7 +125,7 @@ int main(void) {
 	_tprintf(TEXT("> Process information\n"));
 	_tprintf(TEXT("--------------------------------------------\n"));
 	_tprintf(TEXT(">   H1z1 Module: %016llX\n"), (DWORD64)h1z1Module);
-	_tprintf(TEXT(">  Z Pos Offset: 0x%X\n"), (DWORD)h1z1Module + zPosOffset);
+	_tprintf(TEXT(">  Z Pos Offset: 0x%X\n"), (DWORD64)h1z1Module + zPosOffset);
 	_tprintf(TEXT(">   Base of DLL: 0x%X\n"), moduleInfo.lpBaseOfDll);
 	_tprintf(TEXT("> Size of image: 0x%X\n"), moduleInfo.SizeOfImage);
 	_tprintf(TEXT(">   Entry point: 0x%X\n"), moduleInfo.EntryPoint);

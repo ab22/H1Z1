@@ -2,11 +2,15 @@
 
 
 #include <Windows.h>
+#include <exception>
 #include <CommCtrl.h>
 #include <tchar.h>
 
+#include "../Logic/H1z1.h"
 #include "../Infrastructure/Messages/WindowMessages.h"
+#include "../resource.h"
 
+using namespace std;
 
 // Manifest to use the latest CommCtl32 library which
 // enables the newest visual styles for windows.
@@ -18,10 +22,13 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 class MainEventHandler {
 private:
+	PlayerCoords        coords;
 	HINSTANCE           hInstance;
 	HWND                hwnd;
+	H1z1				h1z1;
 	int                 charWidth;
 	int                 charHeight;
+	int                 timerId;
 
 public:
 	MainEventHandler();
@@ -37,8 +44,13 @@ public:
 	LRESULT OnCommand(CommandWindowMessage*);
 	// WM_LBUTTONDOWN: Called when the left mouse button is clicked
 	LRESULT OnLeftMouseButtonClick(LeftMouseButtonDownMessage*);
+	// WM_TIMER: Called when a timer sends a WM to the hwnd
+	LRESULT OnTimerCallback(TimerMessage*);
 
 private:
 	BOOL     initCommonVisualControls();
 	void     calculateDefaultFontSizes(HDC);
+	void     drawMap(HDC);
+	void     drawPlayerPosition(HDC);
+	void     attachToH1Z1Process();
 };

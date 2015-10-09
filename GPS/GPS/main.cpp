@@ -6,8 +6,8 @@
 // and headers in case we need them.
 #define APP_CLASS_NAME  TEXT("H1Z1_GPS")
 #define APP_WND_TITLE   TEXT("H1Z1 GPS")
-#define APP_WIDTH       950
-#define APP_HEIGHT      720
+#define APP_WIDTH       735
+#define APP_HEIGHT      755
 
 #include "EventHandlers\MainEventHandler.h"
 #include "Infrastructure\Messages\WindowMessages.h"
@@ -41,6 +41,10 @@ LRESULT CALLBACK WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	case WM_SIZE:
 		message = new ResizeWindowMessage(hwnd, msg, wParam, lParam);
 		result = mainEventHandler->OnResize((ResizeWindowMessage *)message);
+		break;
+	case WM_TIMER:
+		message = new TimerMessage(hwnd, msg, wParam, lParam);
+		result = mainEventHandler->OnTimerCallback((TimerMessage *)message);
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
@@ -87,7 +91,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char *lpCmdLine
 		APP_WIDTH,
 		APP_HEIGHT,
 		0,
-		0,
+		LoadMenu(hInstance, MAKEINTRESOURCE(IDR_MENU1)),
 		hInstance,
 		0
 	);

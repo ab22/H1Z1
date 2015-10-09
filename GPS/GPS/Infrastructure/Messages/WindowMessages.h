@@ -10,3 +10,4 @@
 #include "ResizeWindowMessage.h"
 #include "PaintWindowMessage.h"
 #include "InitDialogMessage.h"
+#include "TimerMessage.h"

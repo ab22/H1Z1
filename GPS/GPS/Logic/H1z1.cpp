@@ -5,6 +5,7 @@ H1z1::H1z1() {
 	this->status = (int)H1z1Status::NOT_ATTACHED;
 	this->h1z1Module = NULL;
 	this->processHandle = NULL;
+	this->baseAddress = 0;
 }
 
 H1z1::~H1z1() {
@@ -27,6 +28,7 @@ void H1z1::AttachToProcess() {
 	}
 
 	this->status = (int)H1z1Status::ATTACHED;
+	this->baseAddress = (DWORD64)this->h1z1Module;
 }
 
 void H1z1::GetCoordinates(PlayerCoords* coords) {
@@ -34,7 +36,7 @@ void H1z1::GetCoordinates(PlayerCoords* coords) {
 		throw exception("Process is not attached!");
 	}
 
-	DWORD64 address = (DWORD64)this->h1z1Module + this->positionsOffset;
+	DWORD64 address = this->baseAddress + this->positionsOffset;
 
 	BOOL result = ReadProcessMemory(
 		this->processHandle,
@@ -67,6 +69,7 @@ void H1z1::resetValues() {
 	this->processHandle = NULL;
 	this->status = (int)H1z1Status::NOT_ATTACHED;
 	this->h1z1Module = NULL;
+	this->baseAddress = 0;
 }
 
 

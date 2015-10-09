@@ -33,6 +33,7 @@ private:
 	int     status;
 	HANDLE  processHandle;
 	HMODULE h1z1Module;
+	DWORD64 baseAddress;
 
 	void    resetValues();
 	HANDLE  getH1z1ProcessHandle();

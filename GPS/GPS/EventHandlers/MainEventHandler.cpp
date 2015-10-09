@@ -30,6 +30,7 @@ LRESULT MainEventHandler::OnCreate(CreateWindowMessage *msg) {
 }
 
 LRESULT MainEventHandler::OnPaint(PaintWindowMessage *msg) {
+	TCHAR       title[64];
 	PAINTSTRUCT ps;
 	HDC         hdc;
 
@@ -39,6 +40,9 @@ LRESULT MainEventHandler::OnPaint(PaintWindowMessage *msg) {
 	this->drawPlayerPosition(hdc);
 
 	EndPaint(msg->hwnd, &ps);
+
+	_stprintf_s(title, _countof(title), TEXT("H1Z1 GPS - (Z: %.2f, X: %.2f)"), this->coords.z, this->coords.x);
+	SetWindowText(this->hwnd, title);
 
 	return 0;
 }
@@ -111,7 +115,6 @@ void MainEventHandler::drawPlayerPosition(HDC hdc) {
 		return;
 	}
 
-	TCHAR  title[128];
 	HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
 	SelectObject(hdc, brush);
 
@@ -123,9 +126,6 @@ void MainEventHandler::drawPlayerPosition(HDC hdc) {
 	int x = (int)(720 - (((mappedPosX / 8000) * imageSize)));
 
 	Ellipse(hdc, z, x, z + 10, x + 10);
-
-	_stprintf_s(title, _countof(title), TEXT("H1Z1 GPS - (Z: %.2f, X: %.2f)"), this->coords.z, this->coords.x);
-	SetWindowText(this->hwnd, title);
 }
 
 void MainEventHandler::attachToH1Z1Process() {

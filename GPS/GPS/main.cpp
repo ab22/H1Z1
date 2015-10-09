@@ -108,5 +108,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char *lpCmdLine
 
 	delete mainEventHandler;
 
-	return msg.wParam;
+	return (int)msg.wParam;
 }

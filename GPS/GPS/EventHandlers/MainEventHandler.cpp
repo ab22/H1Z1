@@ -63,7 +63,7 @@ LRESULT MainEventHandler::OnTimerCallback(TimerMessage* msg) {
 	if (msg->timerId == this->timerId) {
 		try {
 			this->h1z1.GetCoordinates(&this->coords);
-			InvalidateRect(this->hwnd, NULL, TRUE);
+			InvalidateRect(this->hwnd, NULL, FALSE);
 		} catch (exception& e){
 			KillTimer(this->hwnd, this->timerId);
 			MessageBoxA(this->hwnd, e.what(), "Error", MB_OK);
@@ -137,6 +137,6 @@ void MainEventHandler::attachToH1Z1Process() {
 		return;
 	}
 
-	InvalidateRect(this->hwnd, NULL, TRUE);
+	InvalidateRect(this->hwnd, NULL, FALSE);
 	SetTimer(this->hwnd, this->timerId, 1000, NULL);
 }

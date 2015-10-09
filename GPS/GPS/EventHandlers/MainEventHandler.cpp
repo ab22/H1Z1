@@ -67,7 +67,7 @@ LRESULT MainEventHandler::OnTimerCallback(TimerMessage* msg) {
 		} catch (exception& e){
 			KillTimer(this->hwnd, this->timerId);
 			MessageBoxA(this->hwnd, e.what(), "Error", MB_OK);
-		}		
+		}
 	}
 
 	return 0;
@@ -121,14 +121,8 @@ void MainEventHandler::drawPlayerPosition(HDC hdc) {
 
 	int z = (int)((mappedPosZ / 8000) * imageSize);
 	int x = (int)(720 - (((mappedPosX / 8000) * imageSize)));
-	
-	Ellipse(
-		hdc,
-		z,
-		x,
-		z + 10,
-		x + 10
-	);
+
+	Ellipse(hdc, z, x, z + 10, x + 10);
 
 	_stprintf_s(title, _countof(title), TEXT("H1Z1 GPS - (Z: %.2f, X: %.2f)"), this->coords.z, this->coords.x);
 	SetWindowText(this->hwnd, title);

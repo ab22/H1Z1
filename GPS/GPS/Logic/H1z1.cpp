@@ -2,7 +2,7 @@
 
 
 H1z1::H1z1() {
-	this->status = (int)H1z1Status::NOT_ATTACHED;
+	this->status = H1z1Status::NOT_ATTACHED;
 	this->h1z1Module = NULL;
 	this->processHandle = NULL;
 	this->baseAddress = 0;
@@ -27,12 +27,12 @@ void H1z1::AttachToProcess() {
 		throw exception("H1Z1 Module not found!");
 	}
 
-	this->status = (int)H1z1Status::ATTACHED;
+	this->status = H1z1Status::ATTACHED;
 	this->baseAddress = (DWORD64)this->h1z1Module;
 }
 
 void H1z1::GetCoordinates(PlayerCoords* coords) {
-	if (this->status != (int)H1z1Status::ATTACHED) {
+	if (this->status != H1z1Status::ATTACHED) {
 		throw exception("Process is not attached!");
 	}
 
@@ -67,7 +67,7 @@ void H1z1::resetValues() {
 	}
 
 	this->processHandle = NULL;
-	this->status = (int)H1z1Status::NOT_ATTACHED;
+	this->status = H1z1Status::NOT_ATTACHED;
 	this->h1z1Module = NULL;
 	this->baseAddress = 0;
 }

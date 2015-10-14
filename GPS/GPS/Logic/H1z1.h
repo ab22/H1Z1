@@ -30,10 +30,10 @@ public:
 private:
 	const int positionsOffset = 0x3A8B27C;
 
-	int     status;
-	HANDLE  processHandle;
-	HMODULE h1z1Module;
-	DWORD64 baseAddress;
+	H1z1Status     status;
+	HANDLE         processHandle;
+	HMODULE        h1z1Module;
+	DWORD64        baseAddress;
 
 	void    resetValues();
 	HANDLE  getH1z1ProcessHandle();

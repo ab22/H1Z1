@@ -117,13 +117,19 @@ void MainEventHandler::drawPlayerPosition(HDC hdc) {
 
 	HBRUSH brush = CreateSolidBrush(RGB(255, 255, 0));
 	SelectObject(hdc, brush);
+		
+	// BR Map contains letters and numbers on the borders. This is its offset in pixels.
+	int offset = 22;
+	int imageSize = 692;
 
-	int imageSize = 720;
 	float mappedPosZ = this->coords.z <= -4000 ? 0 : this->coords.z + 4000;
 	float mappedPosX = this->coords.x <= -4000 ? 0 : this->coords.x + 4000;
 
 	int z = (int)((mappedPosZ / 8000) * imageSize);
-	int x = (int)(720 - (((mappedPosX / 8000) * imageSize)));
+	int x = (int)(imageSize - (((mappedPosX / 8000) * imageSize)));
+
+	z += offset;
+	x += offset;
 
 	Ellipse(hdc, z, x, z + 10, x + 10);
 }

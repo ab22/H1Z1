@@ -26,9 +26,11 @@ public:
 
 	void AttachToProcess();
 	void GetCoordinates(PlayerCoords*);
+	void GetHeadingTo(float*);
 	bool IsAttached();
 private:
-	const int positionsOffset = 0x3A8B27C;
+	const DWORD64 positionsOffset = 0x3AAA35C;
+	const DWORD64 headingOffset = 0x0C43C220;
 
 	H1z1Status     status;
 	HANDLE         processHandle;

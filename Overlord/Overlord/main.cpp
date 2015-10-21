@@ -105,7 +105,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char *lpCmdLine
 	UpdateWindow(hwnd);
 
 	MSG msg;
-	d3dApp.Initialize(hwnd);
+	d3dApp.Initialize(hwnd, &h1z1);
 	
 	while (TRUE){
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
@@ -117,8 +117,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char *lpCmdLine
 			}
 		}
 		else {
-			d3dApp.Render();
-			Sleep(50);
+			try {
+				d3dApp.Render();
+			} catch (exception &e) {
+				char errorMessage[128];
+
+				sprintf(errorMessage, "Error reading from the H1Z1 process: %s", e.what());
+
+				MessageBoxA(NULL, errorMessage, "Error!", MB_OK);
+				break;
+			}			
+			Sleep(100);
 		}
 	}
 

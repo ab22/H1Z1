@@ -38,6 +38,7 @@ private:
 	ID3DX10Font*            smallFont;
 	H1z1*                   h1z1;
 	PlayerCoords            playerCoords;
+	float                   headingTo;
 
 public:
 	D3DApp();

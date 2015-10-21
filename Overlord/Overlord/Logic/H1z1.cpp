@@ -57,6 +57,32 @@ void H1z1::GetCoordinates(PlayerCoords* coords) {
 	}
 }
 
+void H1z1::GetHeadingTo(float* headingTo) {
+	if (this->status != H1z1Status::ATTACHED) {
+		throw exception("Process is not attached!");
+	}
+
+	DWORD64 address = this->headingOffset;
+
+	BOOL result = ReadProcessMemory(
+		this->processHandle,
+		(LPCVOID)(address),
+		(LPVOID)headingTo,
+		sizeof(float),
+		NULL
+	);
+
+	if (result == 0) {
+		char message[128];
+		DWORD errorCode = GetLastError();
+
+		sprintf_s(message, sizeof(message), "Error(%d): could not read process memory", errorCode);
+		this->resetValues();
+
+		throw exception(message);
+	}
+}
+
 bool H1z1::IsAttached() {
 	return this->status == H1z1Status::ATTACHED;
 }

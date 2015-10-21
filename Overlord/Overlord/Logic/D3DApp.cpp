@@ -7,6 +7,7 @@ D3DApp::D3DApp() {
 	this->smallFont = NULL;
 	this->h1z1 = NULL;
 	this->hwnd = NULL;
+	this->headingTo = 0.0f;
 	
 	ZeroMemory(&this->playerCoords, sizeof(PlayerCoords));
 }
@@ -84,6 +85,7 @@ void D3DApp::Render() {
 	this->device->ClearRenderTargetView(this->backBuffer, D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f));
 
 	this->h1z1->GetCoordinates(&this->playerCoords);
+	this->h1z1->GetHeadingTo(&this->headingTo);
 	this->drawCoords();
 
 	this->swapChain->Present(0, 0);
@@ -98,7 +100,7 @@ void D3DApp::drawCoords() {
 	textPos.left = 15;
 	textPos.top = 15;
 
-	textLength = sprintf(playerCoords, "LOCATION - (Z: %.2f, X: %.2f)", this->playerCoords.z, this->playerCoords.x);
+	textLength = sprintf(playerCoords, "LOCATION - (Z: %.2f, X: %.2f) - Heading: %.2f", this->playerCoords.z, this->playerCoords.x, this->headingTo);
 
 	this->smallFont->DrawTextA(NULL, playerCoords, textLength, &textPos, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
 }

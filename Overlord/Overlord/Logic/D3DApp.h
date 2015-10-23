@@ -51,4 +51,5 @@ public:
 private:
 	bool attachToProcess();
 	void drawCoords();
+	int  getCompassString(char *, float);
 };

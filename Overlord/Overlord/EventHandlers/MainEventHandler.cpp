@@ -32,7 +32,7 @@ LRESULT MainEventHandler::OnCreate(CreateWindowMessage *msg) {
 }
 
 LRESULT MainEventHandler::OnPaint(PaintWindowMessage *msg) {
-	MARGINS margin = {0, 0, 800, 600};
+	MARGINS     margin = {0, 0, 800, 600};
 
 	DwmExtendFrameIntoClientArea(hwnd, &margin);
 

@@ -28,7 +28,7 @@ public:
 	void GetCoordinates(PlayerCoords*);
 	bool IsAttached();
 private:
-	const int positionsOffset = 0x3A8B27C;
+	const DWORD64 positionsOffset = 0x3AAA4BCULL;
 
 	H1z1Status     status;
 	HANDLE         processHandle;

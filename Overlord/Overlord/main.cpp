@@ -122,7 +122,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char *lpCmdLine
 			} catch (exception &e) {
 				char errorMessage[128];
 
-				sprintf(errorMessage, "Error reading from the H1Z1 process: %s", e.what());
+				sprintf(errorMessage, "Error rendering: %s", e.what());
 
 				MessageBoxA(NULL, errorMessage, "Error!", MB_OK);
 				break;

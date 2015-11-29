@@ -29,8 +29,8 @@ public:
 	void GetHeadingTo(float*);
 	bool IsAttached();
 private:
-	const DWORD64 positionsOffset = 0x3AAA4BCULL;
-	const DWORD64 headingOffset = 0x0C44C220ULL;
+	const DWORD64 positionsOffset = 0x3ABE95Cull;
+	const DWORD64 headingOffset = 0x29190270ull;
 
 	H1z1Status     status;
 	HANDLE         processHandle;

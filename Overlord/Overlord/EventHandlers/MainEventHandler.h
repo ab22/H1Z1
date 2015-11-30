@@ -27,7 +27,7 @@ private:
 	PlayerCoords        coords;
 	HINSTANCE           hInstance;
 	HWND                hwnd;
-	H1z1				h1z1;
+	H1z1*               h1z1;
 	int                 charWidth;
 	int                 charHeight;
 	int                 timerId;
@@ -44,6 +44,9 @@ public:
 	LRESULT OnResize(ResizeWindowMessage*);
 	// WM_TIMER: Called when a timer sends a WM to the hwnd
 	LRESULT OnTimerCallback(TimerMessage*);
+
+
+	void SetH1z1Client(H1z1*);
 
 private:
 	BOOL     initCommonVisualControls();

@@ -59,6 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char *lpCmdLine
 	// Try to attach to the H1Z1 process. If it fails, then close our app.
 	try {
 		h1z1.AttachToProcess();
+		mainEventHandler.SetH1z1Client(&h1z1);
 	}
 	catch (exception &e) {
 		char errorMessage[128];

@@ -5,6 +5,11 @@
 #include <Psapi.h>
 #include <stdio.h>
 #include <exception>
+#include <fstream>
+#include <sstream>
+#include "../vendor/rapidjson/document.h"
+#include "../vendor/rapidjson/writer.h"
+#include "../vendor/rapidjson/stringbuffer.h"
 
 using namespace std;
 
@@ -29,8 +34,10 @@ public:
 	void GetHeadingTo(float*);
 	bool IsAttached();
 private:
-	const DWORD64 positionsOffset = 0x3ABE95Cull;
-	const DWORD64 headingOffset = 0x29190270ull;
+	//DWORD64 positionsOffset = 0x3ABE95Cul;
+	//DWORD64 headingOffset = 0x29190270ul;
+	DWORD64 positionsOffset = 0;
+	DWORD64 headingOffset = 0;
 
 	H1z1Status     status;
 	HANDLE         processHandle;
@@ -43,6 +50,8 @@ private:
 	HANDLE  getH1z1ProcessHandle();
 	HWND    findH1z1WindowHandle();
 	HMODULE findH1Z1Module(HANDLE);
+	char*   readConfigFile();
+	void    readConfigVariables();
 
 	static BOOL CALLBACK enumWindowsProc(HWND, LPARAM);
 };

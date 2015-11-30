@@ -57,3 +57,5 @@ _ReSharper*
 
 #windows files
 thumbs.db
+
+config.json

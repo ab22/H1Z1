@@ -16,6 +16,10 @@ MainEventHandler::~MainEventHandler() {
 
 }
 
+void MainEventHandler::SetH1z1Client(H1z1* h1z1) {
+	this->h1z1 = h1z1;
+}
+
 LRESULT MainEventHandler::OnCreate(CreateWindowMessage *msg) {
 	HDC hdc;
 
@@ -46,7 +50,7 @@ LRESULT MainEventHandler::OnResize(ResizeWindowMessage *msg) {
 LRESULT MainEventHandler::OnTimerCallback(TimerMessage* msg) {
 	if (msg->timerId == this->timerId) {
 		try {
-			this->h1z1.GetCoordinates(&this->coords);
+			this->h1z1->GetCoordinates(&this->coords);
 			InvalidateRect(this->hwnd, NULL, FALSE);
 		} catch (exception& e){
 			KillTimer(this->hwnd, this->timerId);
@@ -76,7 +80,7 @@ BOOL MainEventHandler::initCommonVisualControls() {
 
 void MainEventHandler::attachToH1Z1Process() {
 	try {
-		h1z1.AttachToProcess();
+		h1z1->AttachToProcess();
 	}
 	catch (exception &e) {
 		MessageBoxA(this->hwnd, e.what(), "Error", MB_OK);

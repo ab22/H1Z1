@@ -6,6 +6,8 @@ H1z1::H1z1() {
 	this->h1z1Module = NULL;
 	this->processHandle = NULL;
 	this->baseAddress = 0;
+
+	this->readConfigVariables();
 }
 
 H1z1::~H1z1() {
@@ -98,7 +100,6 @@ void H1z1::resetValues() {
 	this->baseAddress = 0;
 }
 
-
 BOOL CALLBACK H1z1::enumWindowsProc(HWND hwnd, LPARAM lParam) {
 	TCHAR h1z1Title[] = TEXT("H1Z1 v0.");
 	TCHAR title[MAX_PATH];
@@ -113,7 +114,6 @@ BOOL CALLBACK H1z1::enumWindowsProc(HWND hwnd, LPARAM lParam) {
 	*returnValue = hwnd;
 	return FALSE;
 }
-
 
 HWND H1z1::findH1z1WindowHandle() {
 	HWND hwnd = NULL;
@@ -177,4 +177,37 @@ HMODULE H1z1::findH1Z1Module(HANDLE processHandle) {
 	}
 
 	return NULL;
+}
+
+char* H1z1::readConfigFile() {
+	fstream config;
+	char*    buffer;
+	size_t   fileSize = 0;
+
+	config.open("config.json", ios::in | ios::ate | ios::binary);
+
+	fileSize += config.tellg();
+	config.seekg(0, ios::beg);
+
+	buffer = new char[fileSize];
+	config.read(buffer, fileSize);
+	buffer[fileSize] = '\0';
+	
+	return buffer;
+}
+
+void H1z1::readConfigVariables() {
+	rapidjson::Document configFile;
+	string              value;
+	
+	char* jsonData = this->readConfigFile();
+	configFile.Parse(jsonData);
+
+	value = configFile["positionsOffset"].GetString();
+	this->positionsOffset = std::stoul(value, nullptr, 16);
+
+	value = configFile["headingOffset"].GetString();
+	this->headingOffset = std::stoul(value, nullptr, 16);
+
+	return;
 }

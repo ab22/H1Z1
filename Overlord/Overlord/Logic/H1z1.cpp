@@ -192,6 +192,8 @@ char* H1z1::readConfigFile() {
 	buffer = new char[fileSize];
 	config.read(buffer, fileSize);
 	buffer[fileSize] = '\0';
+
+	config.close();
 	
 	return buffer;
 }

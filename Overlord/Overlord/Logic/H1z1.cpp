@@ -180,35 +180,35 @@ HMODULE H1z1::findH1Z1Module(HANDLE processHandle) {
 }
 
 char* H1z1::readConfigFile() {
-	fstream config;
+	fstream configFile;
 	char*    buffer;
-	size_t   fileSize = 0;
+	size_t   fileSize;
 
-	config.open("config.json", ios::in | ios::ate | ios::binary);
+	configFile.open("config.json", ios::in | ios::ate | ios::binary);
 
-	fileSize += config.tellg();
-	config.seekg(0, ios::beg);
+	fileSize = configFile.tellg();
+	configFile.seekg(0, ios::beg);
 
 	buffer = new char[fileSize];
-	config.read(buffer, fileSize);
+	configFile.read(buffer, fileSize);
 	buffer[fileSize] = '\0';
 
-	config.close();
+	configFile.close();
 	
 	return buffer;
 }
 
 void H1z1::readConfigVariables() {
-	rapidjson::Document configFile;
+	rapidjson::Document config;
 	string              value;
 	
 	char* jsonData = this->readConfigFile();
-	configFile.Parse(jsonData);
+	config.Parse(jsonData);
 
-	value = configFile["positionsOffset"].GetString();
+	value = config["positionsOffset"].GetString();
 	this->positionsOffset = std::stoul(value, nullptr, 16);
 
-	value = configFile["headingOffset"].GetString();
+	value = config["headingOffset"].GetString();
 	this->headingOffset = std::stoul(value, nullptr, 16);
 
 	return;

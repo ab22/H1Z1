@@ -34,8 +34,6 @@ public:
 	void GetHeadingTo(float*);
 	bool IsAttached();
 private:
-	//DWORD64 positionsOffset = 0x3ABE95Cul;
-	//DWORD64 headingOffset = 0x29190270ul;
 	DWORD64 positionsOffset = 0;
 	DWORD64 headingOffset = 0;
 

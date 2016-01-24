@@ -53,7 +53,7 @@ void H1z1::GetCoordinates(PlayerCoords* coords) {
 		DWORD errorCode = GetLastError();
 
 		sprintf_s(message, sizeof(message), "Error(%d): could not read process memory", errorCode);
-		this->resetValues();		
+		this->resetValues();
 
 		throw exception(message);
 	}
@@ -194,14 +194,14 @@ char* H1z1::readConfigFile() {
 	buffer[fileSize] = '\0';
 
 	configFile.close();
-	
+
 	return buffer;
 }
 
 void H1z1::readConfigVariables() {
 	rapidjson::Document config;
 	string              value;
-	
+
 	char* jsonData = this->readConfigFile();
 	config.Parse(jsonData);
 
@@ -210,6 +210,8 @@ void H1z1::readConfigVariables() {
 
 	value = config["headingOffset"].GetString();
 	this->headingOffset = std::stoul(value, nullptr, 16);
+
+	delete[] jsonData;
 
 	return;
 }
